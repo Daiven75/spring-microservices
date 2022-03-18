@@ -50,7 +50,7 @@ public class BookResource {
 //                        .block());
 //        var conversionValueWebClient = cambioWebClient.getConversionValue();
 
-        var cambio = cambioIntegration.getCambio(book.getPrice(), 2.0, currency)
+        var cambio = cambioIntegration.getCambio(book.getPrice(), "USD", currency)
                 .orElseThrow(() -> new RuntimeException("cambio failure!"));
         var conversionValue = cambio.getConversionValue();
         book.setPrice(conversionValue);

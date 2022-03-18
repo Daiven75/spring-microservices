@@ -3,6 +3,8 @@ package br.com.lucasilva.controller;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("cambio-service")
 public class CambioController {
+
+	private Logger log = LoggerFactory.getLogger(CambioController.class);
 	
 	@Autowired
 	private Environment environment;
@@ -32,6 +36,8 @@ public class CambioController {
 			@PathVariable("amount") BigDecimal amount,
 			@PathVariable("from") String from,
 			@PathVariable("to") String to) {
+
+		log.info("getCambio is called with -> {}, {} and {}", amount, from, to);
 
 		var cambio = cambioRepository.findByFromAndTo(from, to)
 				.orElseThrow(() -> new RuntimeException("Currency unsupported!"));

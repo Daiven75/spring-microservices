@@ -14,6 +14,6 @@ public interface CambioIntegration {
     @GetMapping("cambio-service/{amount}/{from}/{to}")
     Optional<Cambio> getCambio(
             @PathVariable("amount") Double amount,
-            @PathVariable("from") Double from,
+            @PathVariable("from") String from,
             @PathVariable("to") String to);
 }
