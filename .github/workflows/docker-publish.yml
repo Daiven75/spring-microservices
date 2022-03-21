@@ -44,3 +44,14 @@ jobs:
       - name: Docker Compose Build
         working-directory: .
         run: docker-compose build
+      
+      - name: Push to Docker Hub
+        run: |
+          docker tag ${{ secrets.DOCKER_USERNAME }}/naming-server:1.0.0 ${{ secrets.DOCKER_USERNAME }}/naming-server:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/api-gateway:1.0.0 ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/cambio-service:latest ${{ secrets.DOCKER_USERNAME }}/cambio-service:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/book-service:latest ${{ secrets.DOCKER_USERNAME }}/book-service:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/naming-server:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/api-gateway:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/cambio-service:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/book-service:latest
